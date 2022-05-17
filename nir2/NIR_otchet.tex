@@ -1,0 +1,282 @@
+%
+% Шаблон для НИР версия 2021
+%
+
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage{vkriate}
+\usepackage{longtable}
+\usepackage{multirow}
+
+
+% Настройки для окружений с подчеркиваниями для подписей и пр.
+\setFRMfontencoding{T2A}
+\setFRMdfontencoding{T2A}
+% thanks to A.Starikov
+\setFRMfontfamily{cmr}
+\setFRMdfontfamily{ptm}
+\setFRMdfontsize{10pt}
+
+% задает длину поля для подписи на титульной странице
+\newFRMfield{xtitlesign}{32mm}
+
+% поле для факультета или кафедры
+\newFRMfield{fcath}{65mm}
+
+%имя файла с библиографией в формате BibTex
+
+\addbibresource{java.bib}
+
+\begin{document}
+
+% счетчики страниц, рисунков, таблиц
+\regtotcounter{page}
+\regtotcounter{figure}
+\regtotcounter{table}
+
+\renewcommand{\refname}{\centerline{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} 
+\renewcommand{\contentsname}{\centerline{СОДЕРЖАНИЕ}} 
+%\renewcommand{\refname}{Список источников}  % По умолчанию "Список литературы" (article)
+%\renewcommand{\bibname}{Литература}  % По умолчанию "Литература" (book и report)
+
+% титульная страница
+\thispagestyle{empty}
+\begin{center} \small
+\textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ}\\
+ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
+ВЫСШЕГО  ОБРАЗОВАНИЯ\\
+«Национальный исследовательский ядерный университет «МИФИ»\\
+\textbf{Обнинский институт атомной энергетики} – \\
+филиал федерального государственного автономного образовательного учреждения высшего\\
+образования «Национальный исследовательский ядерный университет «МИФИ»\\
+(ИАТЭ НИЯУ МИФИ)
+\end{center}
+%\vfill
+\medskip
+
+% Направление подготовки следует уточнять,
+% магистры и бакалавры могут иметь разные наименования
+\begin{center}
+\begin{tabular}{rl}
+Отделение & \useFRMfield{fcath}[\large Интеллектуальные кибернетические системы] \\ 
+Направление подготовки & \useFRMfield{fcath}[\large Информационные системы и технологии] \\ 
+\end{tabular} 
+\end{center}
+
+\vfill
+
+\large 
+
+\begin{center}
+	Научно-исследовательская работа \\
+	
+	\medskip
+	
+	\textbf{\Large 
+		Java приложение для выбора параметров анализа и визуализации расчётных данных
+	}
+	
+\end{center}
+
+\vspace{1cm}
+
+\begin{tabular*}{\textwidth}{lcr}
+Студент группы ИС-Б18 & \useFRMfield{xtitlesign} & Михайлова А.В.\\
+& & \\
+Руководитель & & \\
+к.т.н., доцент отд. ИКС & \useFRMfield{xtitlesign} & Мирзеабасов О.А.
+\end{tabular*}
+
+
+\vfill
+\large
+
+\begin{center}
+Обнинск, 2022 г
+\end{center}
+
+\onehalfspacing
+
+\pagebreak
+
+% реферат
+\thispagestyle{empty}
+
+\section*{\centering РЕФЕРАТ}
+
+% возможно, кол-во источников придется вставлять вручную
+Работа \total{page} стр., \total{figure} рис. , \totalmycitecounts ист. 
+
+ЯЗЫК ПРОГРАММИРОВАНИЯ JAVA, ОБРАБОТКА ДАННЫХ, РАСЧЁТНЫЕ ПРОГРАММЫ, ВИЗУАЛИЗАЦИЯ, НАТРИЕВЫЙ КОНТУР, ГРАФИЧЕСКИЙ ИНТЕРФЕЙС
+
+Работа посвящена проектированию и разработке приложения на языке Java с графичсеким интерфейсом, которое позволит задавать параметры для последующей визуализации расчетных данных.
+
+Разработанная программа автоматизирует ручную обработку данных и позволит избежать ошибок при последующей визуализации.
+
+%\pagebreak
+%\thispagestyle{empty}
+%
+%\section*{\centering ОПРЕДЕЛЕНИЯ}
+%
+%Репозиторий --- место, где хранятся и поддерживаются версии каких-либо данных. 
+%
+%\pagebreak
+%
+%\section*{\centering ОБОЗНАЧЕНИЯ И СОКРАЩЕНИЯ}
+%
+%
+%НИР --- Научно-исследовательская работа
+%
+%СПВ --- Система поддержки версий
+%
+
+
+\pagebreak
+
+% титульная страница - номер 1, остальные страницы до Содержания не нумеруются
+\tocloftpagestyle{empty}
+
+\tableofcontents
+% если нужно добавить "Стр." над номерами страниц - раскомментируйте следующую команду
+%\addtocontents{toc}{~\hfill\textbf{Стр.}\par}
+
+\pagebreak
+
+\setcounter{page}{3}
+
+\section*{\centering ВВЕДЕНИЕ}
+\addcontentsline{toc}{section}{ВВЕДЕНИЕ}
+\input{intro} % текст введения в файле intro.tex
+\pagebreak
+
+%\input{Post_zad}
+\pagebreak
+\input{part1}  % первая глава - в файле part1.tex
+\pagebreak
+\input{part2} % вторая глава - в файле part2.tex
+\pagebreak
+\input{part3}  % третья глава - в файле part3.tex
+\pagebreak
+
+% если есть еще разделы - сохраните их в соответствующих файлах и раскомментируйте строки ниже, при необходимости добавьте еще
+%\input{part4} % четвертая глава - в файле part4.tex
+%\pagebreak
+
+%\input{part5}  % пятая глава - в файле part5.tex
+%\pagebreak
+
+\section*{\centering ЗАКЛЮЧЕНИЕ}
+\addcontentsline{toc}{section}{ЗАКЛЮЧЕНИЕ}
+
+В результате выполнения научно-исследовательской  работы были решены следующие задачи:
+
+\begin{itemize}
+\item выполнен анализ структуры конфигурационных и расчётных файлов;
+\item разработаны вспомогательные классы для считывания конфигурации;
+\item разработаны классы, описывабщие структуру расчетных файлов;
+\item спроектирован и разработан пользовательский интерфейс задания параметров расчётных данных.
+
+\end{itemize}
+
+
+\pagebreak
+% оформление библиографии - вариант с БД
+\addcontentsline{toc}{section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
+% ВАЖНО: для корректного отображения в списке литературы ссылок на англ.языке в bibtex-описание источника следует добавить поле 
+% langid = {english}
+\printbibliography
+
+
+%\pagebreak
+
+\renewcommand{\appendixpagename}{\centering Приложения}
+
+
+\begin{appendices}
+\renewcommand{\thesection}{\Asbuk{section}}
+\makeatletter
+\renewcommand{\theProgram}{\thesection.\@arabic\c@Program}
+\renewcommand{\thefigure}{\thesection.\@arabic\c@figure}
+\makeatother
+
+% каждое приложение задается следующей командой, нумерация - русскими буквами
+\section{\centering } 
+% независимая нумерация листингов в каждом приложении
+\setcounter{Program}{0}
+\setcounter{figure}{0}
+
+\begin{MyCode}[fontsize=\small]
+
+public class DefaultReader {
+	protected ArrayList<String> fileInf = null;
+	
+	
+	public void readFile (String path) {
+		java.io.FileReader fr = null;
+		ArrayList<String> arr = new ArrayList<>();
+		try {
+			
+			fr = new java.io.FileReader(path);
+			Scanner scan = new Scanner(fr);
+			String s;
+			
+			while (scan.hasNextLine()) {
+				s = scan.nextLine();
+				arr.add(s);
+				
+			}
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(Lleak.class.getName()).log(Level.SEVERE, null, ex);
+		} 
+		finally {
+			if (fr != null) {
+				try {
+					fr.close();
+				} catch (IOException ex) {
+					Logger.getLogger(Lleak.class.getName()).log(Level.SEVERE, null, ex);
+				}
+				
+			}
+		}
+		
+		fileInf = arr;  
+		
+	}
+	
+	protected DefaultReader() {
+	}
+	
+	public ArrayList<String> getFileInf() {
+		return fileInf;
+	}     
+}
+
+\end{MyCode}
+\nopagebreak
+\begin{Program}
+	\caption{Суперкласс DefaultReader}\label{DefReader}
+\end{Program}
+
+\pagebreak
+
+
+
+
+\end{appendices}
+
+
+\end{document}          
+
+
+% следующее приложение - раскомментировать команды
+%\section{\centering } 
+%\setcounter{Program}{0}
+%\begin{MyCode}
+%код третьего приложения
+%\end{MyCode}
+%\nopagebreak
+%\begin{Program}
+%\caption{Еще пример кода}\label{app3}
+%\end{Program}
+

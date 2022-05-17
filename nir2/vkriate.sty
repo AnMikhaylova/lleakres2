@@ -1,0 +1,88 @@
+% стилевой файл для оформления ВКР по требованиям ИАТЭ
+\ProvidesFile{vkriate}
+% В разработке и тестировании шаблонов отчетов по НИР и ВКР с 2008 по 2021 годы принимали участие студенты ИАТЭ:
+% Вероника Мальцева, Ольга Юркова,
+% Александр Стариков, Игорь Бобков, Ангелина Шорошева
+% Максим Федоренко
+% Алёна Дукина
+% Александр Радаев, Павел Бармёнков, Ирина Загородняя
+% Анастасия Горбачева, Анна Масленникова
+% Валентина Петренко
+% Владимир Петченко
+
+\usepackage{cmap}
+
+\usepackage[backend=biber,sorting=none,style=gost-numeric,autolang=other]{biblatex} % библиография
+\usepackage{mathtext} %русские буквы в формулах
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{fancyvrb}
+\usepackage{formular}
+\usepackage{setspace} % управление междустрочными интервалами
+%поля документа
+\usepackage[left=3cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{misccorr} % точки в конце номеров разделов, использовать перед пакетом ccaption!
+\usepackage{ccaption} % изменения подписей к рисункам и табл.
+
+\usepackage[nooneline,labelsep=endash]{caption} 
+\captionsetup[table]{justification=raggedright} % заголовок таблицы выравнивается влево
+\captionsetup[figure]{justification=centering,labelsep=endash} % заголовок рисунка - по центру
+
+% отступ перед первым абзацем
+\usepackage{indentfirst}
+%вставка изображений
+\usepackage{graphicx}
+% счетчики
+\usepackage{totcount}
+% управление содержанием
+\usepackage{tocloft}
+% управление таблицами и рисунками
+\usepackage{float}
+
+%\usepackage[md]{titlesec} % заголовки обычным шрифтом
+\usepackage{titlesec}
+
+\usepackage[title,titletoc]{appendix}
+
+\newcounter{mycitecount}                                %% Счётчик библиографии
+\AtEveryBibitem{\stepcounter{mycitecount}}              %% Работает для biblatex
+
+\usepackage[figure,      %
+            table,       %
+            mycitecount, xspace ]{totalcount}           %% Подсчёт общего количества объектов в документе
+
+% окружение для листингов - с нумерацией строк слева
+\DefineVerbatimEnvironment{MyCode}{Verbatim}{frame=lines,numbers=left,numberblanklines=false,framesep=5mm}
+
+% автоматическая нумерация листингов
+\newfloat{Program}{phb}{lop}
+\floatname{Program}{Листинг}
+\floatstyle{ruled}
+
+\captionsetup[Program]{justification=centering} % подпись к листингу - по центру
+
+\setlength{\parindent}{1.25cm} % абзацный отступ в соответствии с ГОСТ
+
+\setcounter{secnumdepth}{3} % глубина нумерации до подразделов
+
+%если нужны точки в оглавлении для разделов - раскомментируйте следующую команду
+%\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\addto\captionsrussian{%
+\renewcommand{\figurename}{Рисунок}%
+\renewcommand{\tablename}{Таблица}%
+}
+
+% В соответствии с требованием: для списков использовать дефис
+\setlength\leftmargini{4em}
+\renewcommand{\labelitemi}{--}
+
+\titlespacing{\section}{\parindent}{12pt}{12pt}
+\titlespacing{\subsection}{\parindent}{12pt}{12pt}
+\titlespacing{\subsubsection}{\parindent}{12pt}{12pt}
+
+%\renewcommand{\cftsecfont}{\rmfamily}  % Разделы в Содержании обычным текстом (не полужирным)
+
