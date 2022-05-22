@@ -5,6 +5,8 @@
  */
 package lleak.helpers;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tassy
@@ -28,7 +30,8 @@ public class ConfReader extends DefaultReader {
 
     private void setTime() {
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             String[] time_arr = fileInf.get(0).split(" = ");
@@ -42,7 +45,8 @@ public class ConfReader extends DefaultReader {
     private void setChan() {
 
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             String[] chan_arr = fileInf.get(1).split(" = ");
@@ -56,7 +60,8 @@ public class ConfReader extends DefaultReader {
     private void setBounds() {
 
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             String[] bounds_arr = fileInf.get(2).split(" = ");

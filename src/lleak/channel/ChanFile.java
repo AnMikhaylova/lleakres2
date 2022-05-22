@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Класс, представляющий данные из расчетного файла в виде массива (списка) состояний в каждый момент времени
@@ -56,13 +57,19 @@ public class ChanFile {
                 data.add(cp);
             }
         } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Файл не найден\n" + chname,
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ChanFile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Ошибка ввода/вывода",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ChanFile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if(br != null)try {
                 br.close();
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Ошибка ввода/вывода",
+                "Ошибка", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(ChanFile.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

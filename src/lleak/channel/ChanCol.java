@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -74,7 +75,8 @@ public class ChanCol {
             
             
         } catch (FileNotFoundException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Файл с метаданными не найден\nБудет использован файл по умолчанию",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
             //обработка исключения FileNotFoundException
             try {
                 br = new BufferedReader(new FileReader(ChanCol.defaultCSV));
@@ -86,20 +88,28 @@ public class ChanCol {
                 }
 
             } catch (FileNotFoundException ex1) {
+                JOptionPane.showMessageDialog(null, "Файл не найден",
+                "Ошибка", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(ChanCol.class.getName()).log(Level.SEVERE, null, ex1);
             } catch (IOException ex1) {
+                JOptionPane.showMessageDialog(null, "Ошибка ввода/вывода",
+                "Ошибка", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(ChanCol.class.getName()).log(Level.SEVERE, null, ex1);
             }
 
             
             
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Ошибка ввода/вывода",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ChanCol.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (br != null) {
                 try {
                     br.close();
                 } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Ошибка ввода/вывода",
+                    "Ошибка", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(ChanCol.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

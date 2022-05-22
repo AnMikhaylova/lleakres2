@@ -6,6 +6,7 @@
 package lleak.helpers;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +26,8 @@ public class ChanOutfileReader extends DefaultReader {
 
     private void setResults() {
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             for (int i = 0; i < fileInf.size(); i++) {

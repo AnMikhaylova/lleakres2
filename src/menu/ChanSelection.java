@@ -6,8 +6,8 @@
 package menu;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import lleak.helpers.ChanProfReader;
-import lleak.helpers.ChanTxtReader;
 
 /**
  *
@@ -124,7 +124,8 @@ public class ChanSelection extends javax.swing.JDialog {
         String selChan = null;
         selChan = jList1.getSelectedValue();
         if (selChan == null) {
-            System.out.println("error");
+            JOptionPane.showMessageDialog(this, "Выберите канал",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
             if (flag) {
@@ -136,6 +137,7 @@ public class ChanSelection extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    @Override
     public MainMenu getParent() {
         return parent;
     }

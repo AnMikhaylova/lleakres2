@@ -5,13 +5,20 @@
  */
 package menu;
 
+
+import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import lleak.channel.ChanCol;
 import lleak.helpers.*;
 
@@ -368,7 +375,8 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
         String strSelVals = null;
         String strSelParams = null;
         if (lmod2.isEmpty() || lmod4.isEmpty()) {
-            System.out.println("error");
+            JOptionPane.showMessageDialog(this, "Выберите координаты точек и переменные",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             ArrayList<String> selVals = new ArrayList<>();
@@ -400,21 +408,63 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
         }
 
         String rDir = "\"" + parent.getParent().getRDir() + "Rscript.exe" + "\"";
-        System.out.println(rDir);
-        ProcessBuilder processBuilder = new ProcessBuilder("script.bat", rDir, parent.getParent().getRootDir() 
-                +  ctr.getOutfile(), parent.getParent().getRootDir() + "meta.csv", strSelVals, strSelParams, "d");
+
+        FileWriter nFile = null;
+        try {
+            nFile = new FileWriter(parent.getParent().getRootDir() + "selvals.txt");
+            nFile.write(strSelVals);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (nFile != null) {
+                try {
+                    nFile.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                    "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        ProcessBuilder processBuilder = new ProcessBuilder("script.bat", rDir, parent.getParent().getRootDir()
+                + ctr.getOutfile(), parent.getParent().getRootDir() + "meta.csv", strSelParams, "d");
         Process p;
 
         try {
+            String message = "Подождите, идёт сохранение графиков\nДиректория для сохранения: " + parent.getParent().getRootDir();            
+            final JOptionPane jop = new JOptionPane(message, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{}, null);
+            JDialog dialog = jop.createDialog(null, "Загрузка");
+
+            
             p = processBuilder.start();
-            p.waitFor();
-            System.out.println("Done");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        p.waitFor();
+                    } catch (InterruptedException ex) {
+                        JOptionPane.showMessageDialog(null, "Ошибка",
+                        "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        Thread.currentThread().interrupt();
+                        Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dialog.dispose();
+                }
+
+            }).start();
+
+            dialog.setVisible(true);
+            
+            
 
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
             java.util.logging.Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            java.util.logging.Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
 
     }//GEN-LAST:event_jButton4ActionPerformed

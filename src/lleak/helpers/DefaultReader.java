@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import lleak.Lleak;
 
 /**
@@ -37,6 +38,9 @@ public class DefaultReader {
                 
             }
         } catch (FileNotFoundException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Файл не найден\n" + path,
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(Lleak.class.getName()).log(Level.SEVERE, null, ex);
         } 
         finally {
@@ -44,6 +48,8 @@ public class DefaultReader {
                 try {
                     fr.close();
                 } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Ошибка ввода/вывода\n" + path,
+                    "Ошибка", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(Lleak.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 

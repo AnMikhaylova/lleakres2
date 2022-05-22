@@ -18,12 +18,12 @@ public class SegmentGeom {
     private double p1;
     private int p2;
     private int code;
-    private int pump;
+    private double pump;
 
     public SegmentGeom() {
     }
 
-    public SegmentGeom(double w, double h, double s, double xi, int typ, double p1, int p2, int code, int pump) {
+    public SegmentGeom(double w, double h, double s, double xi, int typ, double p1, int p2, int code, double pump) {
         this.w = w;
         this.h = h;
         this.s = s;
@@ -67,7 +67,7 @@ public class SegmentGeom {
         this.code = code;
     }
 
-    public void setPump(int pump) {
+    public void setPump(double pump) {
         this.pump = pump;
     }
 
@@ -103,7 +103,7 @@ public class SegmentGeom {
         return code;
     }
 
-    public int getPump() {
+    public double getPump() {
         return pump;
     }
 

@@ -6,6 +6,7 @@
 package lleak.helpers;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,8 @@ public class GeomReader extends DefaultReader {
 
     private void setSegmentGeoms() {
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             for (int i = 1; i <= nSegments; i++) {
@@ -42,7 +44,7 @@ public class GeomReader extends DefaultReader {
                 double p1 = Double.valueOf(split[5]);
                 int p2 = Integer.valueOf(split[6]);
                 int code = Integer.valueOf(split[7]);
-                int pump = Integer.valueOf(split[8]);
+                double pump = Double.valueOf(split[8]);
 
                 SegmentGeom sg = new SegmentGeom(w, h, s, xi, typ, p1, p2, code, pump);
                 segmentGeoms.add(sg);

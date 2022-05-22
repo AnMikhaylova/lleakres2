@@ -5,6 +5,8 @@
  */
 package lleak.helpers;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tassy
@@ -26,7 +28,8 @@ public class ChanTxtReader extends DefaultReader{
     
     private void setOutfile() {
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             String[] time_arr = fileInf.get(0).split(" = ");
@@ -40,7 +43,8 @@ public class ChanTxtReader extends DefaultReader{
     private void setGeom() {
 
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             String[] chan_arr = fileInf.get(1).split(" = ");

@@ -6,6 +6,7 @@
 package lleak.helpers;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,8 @@ public class TimeReader extends DefaultReader {
 
     private void setTimeIntervals() {
         if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             for (int i = 1; i <= nt; i++) {

@@ -5,9 +5,10 @@
  */
 package lleak.helpers;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,7 +34,8 @@ public class BoundsReader extends DefaultReader{
     
     private void setBoundFiles() {
          if (fileInf == null) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Ошибка чтения файла",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
 
             

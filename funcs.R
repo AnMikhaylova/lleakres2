@@ -72,7 +72,7 @@ drawPlot <- function(df, meta, path_name, vals, params, flag){
 
 mainFunc <- function(chan, meta, selVals, selParams, flag){
   DF <- readChan(chan, meta)
-  meta <- read_delim(meta, delim = ";", escape_double = FALSE, col_names = FALSE, trim_ws = TRUE)
+  meta <- read_delim(meta, delim = ";", escape_double = FALSE, col_names = FALSE, trim_ws = TRUE)  
   testDF <- newDF(DF, selVals, selParams, flag)
   #size <- length(strsplit(chan, "[\\\/]")[[1]])
   #name <- strsplit(chan, "[\\\/]")[[1]][size]
