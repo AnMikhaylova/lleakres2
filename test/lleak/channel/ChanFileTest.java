@@ -48,7 +48,7 @@ public class ChanFileTest {
         columns.add(new ChanCol(1, "j", "Индекс"));
         columns.add(new ChanCol(2, "x", "Координата"));
         columns.add(new ChanCol(3, "u", "Скорость"));
-        ChanFile instance = new ChanFile(1001, 201, "/home/oam/ch1", columns);
+        ChanFile instance = new ChanFile(1001, 201, "D:\\example\\ch1", columns);
         int index = 1000;
         double[] res = instance.getData().get(index).getColumns().get(1);
         System.out.println(res[0]);    }

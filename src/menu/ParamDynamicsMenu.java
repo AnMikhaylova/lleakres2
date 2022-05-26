@@ -81,6 +81,7 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
         jButton8 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -172,6 +173,13 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
             }
         });
 
+        jButton9.setText("Сохранить выбранное");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,7 +196,9 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
                         .addGap(197, 197, 197))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(291, 291, 291)
+                        .addGap(108, 108, 108)
+                        .addComponent(jButton9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -252,7 +262,8 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9))
                 .addContainerGap())
         );
 
@@ -434,7 +445,7 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
         Process p;
 
         try {
-            String message = "Подождите, идёт сохранение графиков\nДиректория для сохранения: " + parent.getParent().getRootDir();            
+            String message = "Подождите, идёт сохранение графиков\nДиректория для сохранения: " + parent.getParent().getRootDir() + "pics";            
             final JOptionPane jop = new JOptionPane(message, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{}, null);
             JDialog dialog = jop.createDialog(null, "Загрузка");
 
@@ -469,6 +480,94 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // save
+        
+        String strSelVals = null;
+        String strSelParams = null;
+        if (lmod2.isEmpty() || lmod4.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Выберите координаты точек и переменные",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            ArrayList<String> selVals = new ArrayList<>();
+            ArrayList<String> arr = new ArrayList<>();
+            ArrayList<String> selParams = new ArrayList<>();
+            Enumeration<String> vals = lmod2.elements();
+            Enumeration<String> params = lmod4.elements();
+
+            while (vals.hasMoreElements()) {
+                selVals.add(vals.nextElement());
+            }
+
+            while (params.hasMoreElements()) {
+                arr.add(params.nextElement());
+            }
+
+            for (String s : arr) {
+                for (ChanCol c : columns) {
+                    if (s.equals(c.getFullname())) {
+                        selParams.add(c.getVarname());
+                    }
+
+                }
+            }
+
+            strSelVals = selVals.toString().replaceAll("\\n", ",").replaceAll("[\\]\\[]", "");
+            strSelParams = selParams.toString().replaceAll("\\n", ",").replaceAll("[\\]\\[]", "");
+
+        }
+
+
+        FileWriter nFile = null;
+        try {
+            nFile = new FileWriter(parent.getParent().getRootDir() + "selvals.txt");
+            nFile.write(strSelVals);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (nFile != null) {
+                try {
+                    nFile.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                    "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        FileWriter argFile = null;
+        
+        try {
+            argFile = new FileWriter(parent.getParent().getRootDir() + "args.txt");
+            argFile.write(parent.getParent().getRootDir() + ctr.getOutfile() + "\n");
+            argFile.write(parent.getParent().getRootDir() + "meta.csv" + "\n");
+            argFile.write(strSelParams + "\n");
+            argFile.write("d");
+            String message = "Данные сохранены в файл: " + parent.getParent().getRootDir() + "args.txt";            
+            JOptionPane.showMessageDialog(this, message,"Сообщение", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+            "Ошибка", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            if (argFile != null){
+                try {
+                    argFile.close();
+                } catch (IOException ex) {
+                     JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                    "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -479,6 +578,7 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;

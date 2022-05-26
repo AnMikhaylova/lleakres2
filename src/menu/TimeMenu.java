@@ -118,6 +118,7 @@ public class TimeMenu extends javax.swing.JDialog {
         jButton8 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -209,6 +210,13 @@ public class TimeMenu extends javax.swing.JDialog {
             }
         });
 
+        jButton9.setText("Сохранить выбранное");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,7 +233,9 @@ public class TimeMenu extends javax.swing.JDialog {
                                 .addGap(149, 149, 149))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(277, 277, 277)))
+                                .addGap(130, 130, 130)
+                                .addComponent(jButton9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -252,13 +262,13 @@ public class TimeMenu extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                         .addGap(83, 83, 83))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -266,26 +276,32 @@ public class TimeMenu extends javax.swing.JDialog {
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                         .addGap(89, 89, 89)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                    .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
-                .addGap(9, 9, 9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                            .addComponent(jButton8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton4))
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9)
+                        .addContainerGap())))
         );
 
         pack();
@@ -442,7 +458,7 @@ public class TimeMenu extends javax.swing.JDialog {
         Process p;
 
         try {
-            String message = "Подождите, идёт сохранение графиков\nДиректория для сохранения: " + parent.getParent().getRootDir();            
+            String message = "Подождите, идёт сохранение графиков\nДиректория для сохранения: " + parent.getParent().getRootDir() + "pics";            
             final JOptionPane jop = new JOptionPane(message, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{}, null);
             JDialog dialog = jop.createDialog(null, "Загрузка");
 
@@ -473,6 +489,93 @@ public class TimeMenu extends javax.swing.JDialog {
         } 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // save
+
+        String strSelVals = null;
+        String strSelParams = null;
+        if (lmod2.isEmpty() || lmod4.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Выберите координаты точек и переменные",
+                "Ошибка", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            ArrayList<String> selVals = new ArrayList<>();
+            ArrayList<String> arr = new ArrayList<>();
+            ArrayList<String> selParams = new ArrayList<>();
+            Enumeration<String> vals = lmod2.elements();
+            Enumeration<String> params = lmod4.elements();
+
+            while (vals.hasMoreElements()) {
+                selVals.add(vals.nextElement());
+            }
+
+            while (params.hasMoreElements()) {
+                arr.add(params.nextElement());
+            }
+
+            for (String s : arr) {
+                for (ChanCol c : columns) {
+                    if (s.equals(c.getFullname())) {
+                        selParams.add(c.getVarname());
+                    }
+
+                }
+            }
+
+            strSelVals = selVals.toString().replaceAll("\\n", ",").replaceAll("[\\]\\[]", "");
+            strSelParams = selParams.toString().replaceAll("\\n", ",").replaceAll("[\\]\\[]", "");
+
+        }
+
+        FileWriter nFile = null;
+        try {
+            nFile = new FileWriter(parent.getParent().getRootDir() + "selvals.txt");
+            nFile.write(strSelVals);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                "Ошибка", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (nFile != null) {
+                try {
+                    nFile.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                        "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        FileWriter argFile = null;
+
+        try {
+            argFile = new FileWriter(parent.getParent().getRootDir() + "args.txt");
+            argFile.write(parent.getParent().getRootDir() + ctr.getOutfile() + "\n");
+            argFile.write(parent.getParent().getRootDir() + "meta.csv" + "\n");
+            argFile.write(strSelParams + "\n");
+            argFile.write("d");
+            String message = "Данные сохранены в файл: " + parent.getParent().getRootDir() + "args.txt";
+            JOptionPane.showMessageDialog(this, message,"Сообщение", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                "Ошибка", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            if (argFile != null){
+                try {
+                    argFile.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Ошибка ввода/вывода\n" + parent.getParent().getRootDir() + "selvals.txt",
+                        "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(ParamDynamicsMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -483,6 +586,7 @@ public class TimeMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
