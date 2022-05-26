@@ -527,6 +527,8 @@ public class TimeMenu extends javax.swing.JDialog {
 
         }
 
+        String rDir = "\"" + parent.getParent().getRDir() + "Rscript.exe" + "\"";
+        
         FileWriter nFile = null;
         try {
             nFile = new FileWriter(parent.getParent().getRootDir() + "selvals.txt");
@@ -551,10 +553,11 @@ public class TimeMenu extends javax.swing.JDialog {
 
         try {
             argFile = new FileWriter(parent.getParent().getRootDir() + "args.txt");
-            argFile.write(parent.getParent().getRootDir() + ctr.getOutfile() + "\n");
-            argFile.write(parent.getParent().getRootDir() + "meta.csv" + "\n");
-            argFile.write(strSelParams + "\n");
-            argFile.write("d");
+            argFile.write(rDir + "\n");
+            argFile.write("\"" + parent.getParent().getRootDir() + ctr.getOutfile() + "\"" + "\n");
+            argFile.write("\"" + parent.getParent().getRootDir() + "meta.csv" + "\"" + "\n");
+            argFile.write("\"" + strSelParams + "\"" + "\n");
+            argFile.write("p");
             String message = "Данные сохранены в файл: " + parent.getParent().getRootDir() + "args.txt";
             JOptionPane.showMessageDialog(this, message,"Сообщение", JOptionPane.INFORMATION_MESSAGE);
 

@@ -517,6 +517,8 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
             strSelParams = selParams.toString().replaceAll("\\n", ",").replaceAll("[\\]\\[]", "");
 
         }
+        
+        String rDir = "\"" + parent.getParent().getRDir() + "Rscript.exe" + "\"";
 
 
         FileWriter nFile = null;
@@ -543,9 +545,10 @@ public class ParamDynamicsMenu extends javax.swing.JDialog {
         
         try {
             argFile = new FileWriter(parent.getParent().getRootDir() + "args.txt");
-            argFile.write(parent.getParent().getRootDir() + ctr.getOutfile() + "\n");
-            argFile.write(parent.getParent().getRootDir() + "meta.csv" + "\n");
-            argFile.write(strSelParams + "\n");
+            argFile.write(rDir + "\n");
+            argFile.write("\"" + parent.getParent().getRootDir() + ctr.getOutfile() + "\"" + "\n");
+            argFile.write("\"" + parent.getParent().getRootDir() + "meta.csv" + "\"" + "\n");
+            argFile.write("\"" + strSelParams + "\"" + "\n");
             argFile.write("d");
             String message = "Данные сохранены в файл: " + parent.getParent().getRootDir() + "args.txt";            
             JOptionPane.showMessageDialog(this, message,"Сообщение", JOptionPane.INFORMATION_MESSAGE);
